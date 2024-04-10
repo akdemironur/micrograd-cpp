@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.1)
-set(CMAKE_CXX_STANDARD 17)
+cmake_minimum_required(VERSION 3.21)
+set(CMAKE_CXX_STANDARD 20)
 
-project(DummyProject VERSION 0.1)
+project(micrograd VERSION 0.1)
 
 include(CTest)
 Include(FetchContent)
@@ -9,19 +9,21 @@ Include(FetchContent)
 FetchContent_Declare(
   Catch2
   GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.3.2 # or a different version
+  GIT_TAG        v3.5.4 # or a different version
 )
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 FetchContent_MakeAvailable(Catch2)
 
 include_directories (${CMAKE_SOURCE_DIR}/include)
 
-add_library             ( DummyLib lib/DummyLib.cpp)
-target_link_libraries   ( DummyLib )
+add_library             ( engine lib/engine.cpp)
+target_link_libraries   ( engine )
 
-add_executable(DummyTest tests/DummyTest.cpp)
-target_link_libraries(DummyTest PRIVATE Catch2::Catch2WithMain DummyLib )
-add_test(NAME DummyTest COMMAND DummyTest)
+add_executable( tests tests/tests.cpp )
+target_link_libraries( tests PRIVATE Catch2::Catch2WithMain engine )
+add_test( NAME engine COMMAND tests )
 
-add_executable          ( DummyExec src/Dummy.cpp )
-target_link_libraries   ( DummyExec DummyLib )
+add_executable          ( micrograd src/micrograd.cpp )
+target_link_libraries   ( micrograd engine )
