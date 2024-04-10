@@ -188,6 +188,54 @@ public:
     out->_backward = [v, out]() { v->_grad += out->_grad * (1.0 - std::tanh(v->_data) * std::tanh(v->_data)); };
     return out;
   }
+
+  friend ValuePtr operator+=(ValuePtr &lhs, const ValuePtr &rhs)
+  {
+    lhs = lhs + rhs;
+    return lhs;
+  }
+
+  template<typename T> friend ValuePtr operator+=(ValuePtr &lhs, const T &rhs)
+  {
+    lhs = lhs + rhs;
+    return lhs;
+  }
+
+  friend ValuePtr operator-=(ValuePtr &lhs, const ValuePtr &rhs)
+  {
+    lhs = lhs - rhs;
+    return lhs;
+  }
+
+  template<typename T> friend ValuePtr operator-=(ValuePtr &lhs, const T &rhs)
+  {
+    lhs = lhs - rhs;
+    return lhs;
+  }
+
+  friend ValuePtr operator*=(ValuePtr &lhs, const ValuePtr &rhs)
+  {
+    lhs = lhs * rhs;
+    return lhs;
+  }
+
+  template<typename T> friend ValuePtr operator*=(ValuePtr &lhs, const T &rhs)
+  {
+    lhs = lhs * rhs;
+    return lhs;
+  }
+
+  friend ValuePtr operator/=(ValuePtr &lhs, const ValuePtr &rhs)
+  {
+    lhs = lhs / rhs;
+    return lhs;
+  }
+
+  template<typename T> friend ValuePtr operator/=(ValuePtr &lhs, const T &rhs)
+  {
+    lhs = lhs / rhs;
+    return lhs;
+  }
 };
 
 using ValuePtr = std::shared_ptr<Value>;

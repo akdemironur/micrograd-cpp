@@ -31,5 +31,23 @@ To get a local copy up and running, follow these simple steps.
 
 ## Usage
 
-To utilize the `micrograd-cpp` library, it is required to generate `std::shared_ptr` objects (which are typedef'd as `ValuePtr`). Following this, the `backward()` function should be invoked. A simple example can be found in `src/micrograd.cpp`.
+To utilize the `micrograd-cpp` library, it is required to generate `std::shared_ptr` objects (which are typedef'd as `ValuePtr`). Following this, the `backward()` function should be invoked. A simple example:
 
+```cpp
+  auto a = std::make_shared<Value>(-4.0);
+  auto b = std::make_shared<Value>(2.0);
+  auto c = a + b;
+  auto d = a * b + pow(b, 3);
+  c = c + c + 1;
+  c = c + 1 + c + (-a);
+  d = d + d * 2 + relu(b + a);
+  d = d + 3 * d + relu(b - a);
+  auto e = c - d;
+  auto f = pow(e, 2);
+  auto g = f / 2.0;
+  g = g + 10.0 / f;
+  std::cout << std::format("{:.4f}", g->data()) << std::endl; 
+  g->backward();
+  std::cout << std::format("{:.4f}", a->grad()) << std::endl;
+  std::cout << std::format("{:.4f}", b->grad()) << std::endl;
+```
