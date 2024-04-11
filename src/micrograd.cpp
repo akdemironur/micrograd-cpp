@@ -22,6 +22,6 @@ int main()
   g->backward();
   std::cout << std::format("{:.4f}", a->grad()) << std::endl;
   std::cout << std::format("{:.4f}", b->grad()) << std::endl;
-
+  g->printDOT("g.dot");
   return 0;
 }
