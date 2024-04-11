@@ -50,4 +50,10 @@ To utilize the `micrograd-cpp` library, it is required to generate `std::shared_
   g->backward();
   std::cout << std::format("{:.4f}", a->grad()) << std::endl;
   std::cout << std::format("{:.4f}", b->grad()) << std::endl;
+  g->printDOT("g.dot");
 ```
+
+## Visualization
+The computation graph can be visualized using the `printDOT(std::string fileName)` method. This method generates a file with a dot representation that can be utilized with tools such as Graphviz. Below is a potential representation:
+
+![Computation Graph](/assets/computation_graph.png)
