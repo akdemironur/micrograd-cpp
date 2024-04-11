@@ -6,8 +6,8 @@
 
 int main()
 {
-  auto a = std::make_shared<Value>(-4.0);
-  auto b = std::make_shared<Value>(2.0);
+  auto a = std::make_shared<Value>(-4.0, "a");
+  auto b = std::make_shared<Value>(2.0, "b");
   auto c = a + b;
   auto d = a * b + pow(b, 3);
   c += c + 1;

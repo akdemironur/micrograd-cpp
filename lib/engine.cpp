@@ -10,8 +10,11 @@ std::pair<std::string, std::string> opDot(OpType *op)
 std::pair<std::string, std::string> valueDot(Value *v)
 {
   std::string valueName = "VAL" + std::to_string(reinterpret_cast<std::uintptr_t>(v));
+  std::string nameField;
+  if (!v->label().empty()) { nameField = std::format("|{}", v->label()); }
   return { valueName,
-    std::format(R"({} [label="val={:.4f}\n grad={:.4f}" shape="box"]; )", valueName, v->data(), v->grad()) };
+    std::format(
+      R"({} [label="{{val: {:.4f}|grad: {:.4f}{}}}" shape="record"]; )", valueName, v->data(), v->grad(), nameField) };
 }
 std::string opToString(OpType op)
 {
