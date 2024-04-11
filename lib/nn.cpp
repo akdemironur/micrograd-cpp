@@ -114,6 +114,5 @@ MLP gradientDescent(const std::vector<size_t> &hiddenLayerSizes,
     for (auto &p : params) { p->_data -= lr * p->grad(); }
   }
 
-
   return mlp;
 }
