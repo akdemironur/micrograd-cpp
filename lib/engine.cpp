@@ -57,8 +57,11 @@ void Value::buildTopo(Value *v, std::vector<Value *> &topo, std::set<Value *> &s
 }
 void Value::backward()
 {
-  _grad = 1.0;
   auto topo_order = topo();
+  for (auto &it : topo_order) {
+    if (it != nullptr) { it->_grad = 0; }
+  }
+  _grad = 1.0;
   for (auto &it : std::ranges::reverse_view(topo_order)) {
     if (it != nullptr) { it->_backward(); }
   }

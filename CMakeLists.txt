@@ -21,9 +21,12 @@ include_directories (${CMAKE_SOURCE_DIR}/include)
 add_library             ( engine lib/engine.cpp)
 target_link_libraries   ( engine )
 
+add_library             ( nn lib/nn.cpp)
+target_link_libraries   ( nn engine )
+
 add_executable( tests tests/tests.cpp )
 target_link_libraries( tests PRIVATE Catch2::Catch2WithMain engine )
 add_test( NAME engine COMMAND tests )
 
 add_executable          ( micrograd src/micrograd.cpp )
-target_link_libraries   ( micrograd engine )
+target_link_libraries   ( micrograd engine nn )

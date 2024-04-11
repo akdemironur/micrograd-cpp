@@ -1,27 +1,13 @@
-#include <__format/format_functions.h>
-#include <engine.h>
+#include "engine.h"
+#include "nn.h"
 #include <format>
 #include <iostream>
 #include <memory>
 
 int main()
 {
-  auto a = std::make_shared<Value>(-4.0, "a");
-  auto b = std::make_shared<Value>(2.0, "b");
-  auto c = a + b;
-  auto d = a * b + pow(b, 3);
-  c += c + 1;
-  c += 1 + c + (-a);
-  d += d * 2 + relu(b + a);
-  d += 3 * d + relu(b - a);
-  auto e = c - d;
-  auto f = pow(e, 2);
-  auto g = f / 2.0;
-  g = g + 10.0 / f;
-  std::cout << std::format("{:.4f}", g->data()) << std::endl;
-  g->backward();
-  std::cout << std::format("{:.4f}", a->grad()) << std::endl;
-  std::cout << std::format("{:.4f}", b->grad()) << std::endl;
-  g->printDOT("g.dot");
+  std::vector<std::vector<double>> xs = { { 2, 3, -1 }, { 3, -1, 0.5 }, { 0.5, 1, 1 }, { 1, 1, -1 } };
+  std::vector<double> ys = { 1, -1, -1, 1 };
+  auto mlp = gradientDescent({ 4, 4 }, xs, ys);
   return 0;
 }

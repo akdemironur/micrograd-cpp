@@ -15,7 +15,6 @@ std::pair<std::string, std::string> opDot(OpType *op);
 class Value
 {
 private:
-  double _data{};
   double _grad{};
   std::function<void()> _backward{ []() {} };
   std::string _label{};
@@ -29,6 +28,7 @@ private:
 
 public:
   using ValuePtr = std::shared_ptr<Value>;
+  double _data{};
   Value() = default;
   explicit Value(double data) : _data(data) {}
   explicit Value(double data, std::string label) : _data(data), _label(std::move(label)) {}
