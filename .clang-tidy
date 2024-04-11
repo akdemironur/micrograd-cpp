@@ -14,6 +14,7 @@ Checks: "*,
         -cppcoreguidelines-non-private-member-variables-in-classes,
         -misc-non-private-member-variables-in-classes,
         -readability-identifier-length,
+        -readability-magic-numbers,
 "
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
