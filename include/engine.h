@@ -2,11 +2,9 @@
 #include <functional>
 #include <iostream>
 #include <memory>
-#include <optional>
 #include <ranges>
 #include <set>
 #include <string>
-#include <type_traits>
 #include <vector>
 
 enum OpType { NONE, ADD, MUL, EXP, POW, RELU, SUB, DIV, TANH };
@@ -40,8 +38,8 @@ public:
   explicit Value(double data) : _data(data), _label(std::to_string(data)) {}
   explicit Value(double data, std::string label) : _data(data), _label(std::move(label)) {}
   [[nodiscard]] double data() const { return _data; }
-
   [[nodiscard]] double grad() const { return _grad; }
+  [[nodiscard]] const std::string &label() const { return _label; }
 
   void backward()
   {

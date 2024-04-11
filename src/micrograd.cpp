@@ -23,6 +23,5 @@ int main()
   std::cout << std::format("{:.4f}", a->grad()) << std::endl;
   std::cout << std::format("{:.4f}", b->grad()) << std::endl;
 
-
   return 0;
 }
